@@ -18,6 +18,7 @@ Requires: argon2-cffi-python = %{version}-%{release}
 Requires: argon2-cffi-python3 = %{version}-%{release}
 Requires: cffi
 Requires: six
+Provides: argon2_cffi
 BuildRequires : buildreq-distutils3
 BuildRequires : cffi
 BuildRequires : pluggy
