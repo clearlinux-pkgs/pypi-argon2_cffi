@@ -5,30 +5,29 @@
 # Source0 file verified with key 0xAE2536227F69F181 (hs@ox.cx)
 #
 Name     : argon2-cffi
-Version  : 21.1.0
-Release  : 18
-URL      : https://files.pythonhosted.org/packages/7b/39/a26aaef5c3f0c6cfd67c80599b5b40a794fdab46f4ee3be925d71e2f9596/argon2-cffi-21.1.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/7b/39/a26aaef5c3f0c6cfd67c80599b5b40a794fdab46f4ee3be925d71e2f9596/argon2-cffi-21.1.0.tar.gz
-Source1  : https://files.pythonhosted.org/packages/7b/39/a26aaef5c3f0c6cfd67c80599b5b40a794fdab46f4ee3be925d71e2f9596/argon2-cffi-21.1.0.tar.gz.asc
+Version  : 21.2.0
+Release  : 19
+URL      : https://files.pythonhosted.org/packages/13/d5/6c21a404fade4e90e7b191ff78cff720d9b2dd3e437948c69287dc9236c0/argon2-cffi-21.2.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/13/d5/6c21a404fade4e90e7b191ff78cff720d9b2dd3e437948c69287dc9236c0/argon2-cffi-21.2.0.tar.gz
+Source1  : https://files.pythonhosted.org/packages/13/d5/6c21a404fade4e90e7b191ff78cff720d9b2dd3e437948c69287dc9236c0/argon2-cffi-21.2.0.tar.gz.asc
 Summary  : The secure Argon2 password hashing algorithm.
 Group    : Development/Tools
-License  : CC0-1.0 MIT
+License  : MIT
 Requires: argon2-cffi-license = %{version}-%{release}
 Requires: argon2-cffi-python = %{version}-%{release}
 Requires: argon2-cffi-python3 = %{version}-%{release}
-Requires: cffi
 BuildRequires : buildreq-distutils3
-BuildRequires : cffi
 BuildRequires : pluggy
 BuildRequires : py-python
+BuildRequires : pypi(flit_core)
 BuildRequires : pytest
 BuildRequires : tox
 BuildRequires : virtualenv
 
 %description
-=================
-Argon2 for Python
-=================
+===================
+*Argon2* for Python
+===================
 .. image:: https://img.shields.io/badge/Docs-Read%20The%20Docs-black
 :target: https://argon2-cffi.readthedocs.io/
 :alt: Documentation
@@ -55,22 +54,22 @@ Summary: python3 components for the argon2-cffi package.
 Group: Default
 Requires: python3-core
 Provides: pypi(argon2_cffi)
-Requires: pypi(cffi)
+Requires: pypi(argon2_cffi_bindings)
 
 %description python3
 python3 components for the argon2-cffi package.
 
 
 %prep
-%setup -q -n argon2-cffi-21.1.0
-cd %{_builddir}/argon2-cffi-21.1.0
+%setup -q -n argon2-cffi-21.2.0
+cd %{_builddir}/argon2-cffi-21.2.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1635703691
+export SOURCE_DATE_EPOCH=1638976435
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -80,15 +79,14 @@ export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 export MAKEFLAGS=%{?_smp_mflags}
-python3 setup.py build
+python3 -m build --wheel --skip-dependency-check --no-isolation
 
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/argon2-cffi
-cp %{_builddir}/argon2-cffi-21.1.0/LICENSE %{buildroot}/usr/share/package-licenses/argon2-cffi/00ff890e8493d10b07d5d3fafa23639bb071e443
-cp %{_builddir}/argon2-cffi-21.1.0/extras/libargon2/LICENSE %{buildroot}/usr/share/package-licenses/argon2-cffi/edffb32348c3b38dd68cfb2e6cac9dc4a3502c8b
-python3 -tt setup.py build  install --root=%{buildroot}
+cp %{_builddir}/argon2-cffi-21.2.0/LICENSE %{buildroot}/usr/share/package-licenses/argon2-cffi/00ff890e8493d10b07d5d3fafa23639bb071e443
+pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -99,7 +97,6 @@ echo ----[ mark ]----
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/argon2-cffi/00ff890e8493d10b07d5d3fafa23639bb071e443
-/usr/share/package-licenses/argon2-cffi/edffb32348c3b38dd68cfb2e6cac9dc4a3502c8b
 
 %files python
 %defattr(-,root,root,-)
