@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xAE2536227F69F181 (hs@ox.cx)
 #
 Name     : argon2-cffi
-Version  : 21.2.0
-Release  : 19
-URL      : https://files.pythonhosted.org/packages/13/d5/6c21a404fade4e90e7b191ff78cff720d9b2dd3e437948c69287dc9236c0/argon2-cffi-21.2.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/13/d5/6c21a404fade4e90e7b191ff78cff720d9b2dd3e437948c69287dc9236c0/argon2-cffi-21.2.0.tar.gz
-Source1  : https://files.pythonhosted.org/packages/13/d5/6c21a404fade4e90e7b191ff78cff720d9b2dd3e437948c69287dc9236c0/argon2-cffi-21.2.0.tar.gz.asc
+Version  : 21.3.0
+Release  : 20
+URL      : https://files.pythonhosted.org/packages/3f/18/20bb5b6bf55e55d14558b57afc3d4476349ab90e0c43e60f27a7c2187289/argon2-cffi-21.3.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/3f/18/20bb5b6bf55e55d14558b57afc3d4476349ab90e0c43e60f27a7c2187289/argon2-cffi-21.3.0.tar.gz
+Source1  : https://files.pythonhosted.org/packages/3f/18/20bb5b6bf55e55d14558b57afc3d4476349ab90e0c43e60f27a7c2187289/argon2-cffi-21.3.0.tar.gz.asc
 Summary  : The secure Argon2 password hashing algorithm.
 Group    : Development/Tools
 License  : MIT
@@ -61,15 +61,15 @@ python3 components for the argon2-cffi package.
 
 
 %prep
-%setup -q -n argon2-cffi-21.2.0
-cd %{_builddir}/argon2-cffi-21.2.0
+%setup -q -n argon2-cffi-21.3.0
+cd %{_builddir}/argon2-cffi-21.3.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1638976435
+export SOURCE_DATE_EPOCH=1639413692
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -85,7 +85,7 @@ python3 -m build --wheel --skip-dependency-check --no-isolation
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/argon2-cffi
-cp %{_builddir}/argon2-cffi-21.2.0/LICENSE %{buildroot}/usr/share/package-licenses/argon2-cffi/00ff890e8493d10b07d5d3fafa23639bb071e443
+cp %{_builddir}/argon2-cffi-21.3.0/LICENSE %{buildroot}/usr/share/package-licenses/argon2-cffi/00ff890e8493d10b07d5d3fafa23639bb071e443
 pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
