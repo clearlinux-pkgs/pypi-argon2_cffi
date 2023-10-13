@@ -5,7 +5,7 @@
 #
 Name     : pypi-argon2_cffi
 Version  : 23.1.0
-Release  : 39
+Release  : 40
 URL      : https://files.pythonhosted.org/packages/31/fa/57ec2c6d16ecd2ba0cf15f3c7d1c3c2e7b5fcb83555ff56d7ab10888ec8f/argon2_cffi-23.1.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/31/fa/57ec2c6d16ecd2ba0cf15f3c7d1c3c2e7b5fcb83555ff56d7ab10888ec8f/argon2_cffi-23.1.0.tar.gz
 Summary  : Argon2 for Python
